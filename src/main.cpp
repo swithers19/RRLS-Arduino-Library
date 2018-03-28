@@ -1,17 +1,33 @@
 #include <Arduino.h>
-#include "led.h"
+#include "ardResp.h"
 
-serialController* x = new serialController();
-led myLed(5, x);
+//Led initialisation
+led myLed(5, serialESP);
+ultraRange sensor(9, 8, serialESP);
 
 void setup() {
   Serial.begin(115200);
-
-    // put your setup code here, to run once:
+  
 }
 
 void loop() {
-  Serial.print(myLed.fetchID(), HEX);
-  delay(5000);
-    // put your main code here, to run repeatedly:
+   //Printing address of first peripheral
+  myLed.turnOn();
+  sensor.readRange();
+
+  Serial.println(sensor.retDistance());
+
 }
+
+
+
+//Serial event checks serial rx buffer everyy loop cycle
+void serialEvent() {
+  serialESP->checkSerial();
+}
+
+
+
+
+
+

@@ -9,11 +9,13 @@
 class led : public peripheral
 {
   private:
-    int pin;
     bool ledOn;
+    int* ledPrint;
   public:
-    led(int iPin, serialController* seri);        //Pin constructor function
-    void TurnOn();        //Pin turnOn
+    led(uint8_t iPin, serialController* seri);        //Pin constructor function
+    void turnOn();        //Pin turnOn
+    void turnOff();
+    int retMode();
 };
 
 #endif
