@@ -11,12 +11,9 @@ void setup() {
 }
 
 void loop() {
-   //Printing address of first peripheral
   myLed.turnOn();
-  sensor.readRange();
-
-  Serial.println(sensor.retDistance());
-
+  //sensor.readRange();
+  //Serial.println(sensor.retDistance());
 }
 
 

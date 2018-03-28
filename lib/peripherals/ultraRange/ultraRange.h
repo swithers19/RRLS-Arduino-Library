@@ -13,6 +13,7 @@ class ultraRange : public peripheral {
         ultraRange(uint8_t trigPin, uint8_t echoPin, serialController* seri);
         void readRange();
         int retDistance();
+        void debugAction(uint8_t debugMode);    
 };
 
 #endif

@@ -15,7 +15,7 @@ class led : public peripheral
     led(uint8_t iPin, serialController* seri);        //Pin constructor function
     void turnOn();        //Pin turnOn
     void turnOff();
-    int retMode();
+    void debugAction(uint8_t debugMode);
 };
 
 #endif

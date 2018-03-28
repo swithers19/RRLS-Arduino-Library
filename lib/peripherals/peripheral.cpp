@@ -7,14 +7,28 @@ uint8_t peripheral::fetchID() {
   return id;
 }
 
+//Sends peripherals in byte format
+void peripheral::sendPeriph() {
+  if (Serial) {
+    Serial.write(device);
+    Serial.write(id);
+    Serial.write(mode);
+    Serial.write(senRead);
+    for (int i = 0; i < 4; i++) {
+      Serial.write(pinArr[i]);
+    }
+  }
+}
+
 //Prints to serial each parameter of a peripheral
 void peripheral::printPeriph() {
   if (Serial) {
-    Serial.println(device, HEX);
-    Serial.println(id, HEX);
-    Serial.println(mode, HEX);
+    Serial.println(device);
+    Serial.println(id);
+    Serial.println(mode);
+    Serial.println(senRead);
     for (int i = 0; i < 4; i++) {
-      Serial.println(pinArr[i], HEX);
+      Serial.println(pinArr[i]);
     }
   }
 }
@@ -25,6 +39,4 @@ void peripheral::newID() {
   id = nextId;
 }
 
-void peripheral::setMode(uint8_t debugMode) {
-  mode = debugMode;
-}
+

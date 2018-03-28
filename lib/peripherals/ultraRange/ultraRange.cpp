@@ -1,6 +1,5 @@
 #include "ultraRange.h"
 
-
 ultraRange::ultraRange(uint8_t ntrigPin, uint8_t nechoPin, serialController* seri) :peripheral() {
     trigPin = ntrigPin;
     echoPin = nechoPin;
@@ -8,6 +7,7 @@ ultraRange::ultraRange(uint8_t ntrigPin, uint8_t nechoPin, serialController* ser
     newID();
     mode = 0;
     pinCnt = 2;
+    senRead = 0;
     pinArr = new uint8_t[4]{trigPin, echoPin, 0, 0};
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
@@ -24,11 +24,16 @@ void ultraRange::readRange(){
     // Reads the echoPin, returns the sound wave travel time in microseconds
     duration = pulseIn(echoPin, HIGH);
     // Calculating the distance
-    distance= duration*0.034/2;
+    senRead = duration*0.034/2;
 }
 
-
 int ultraRange::retDistance(){
-    return distance;
+    return senRead;
     
+}
+
+void ultraRange::debugAction(uint8_t debugMode) {
+    if (debugMode == 0) {
+        readRange();
+    }
 }
