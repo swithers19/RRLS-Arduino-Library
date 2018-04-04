@@ -19,16 +19,17 @@ class serialController {
     peripheral** payloadArr;
     unsigned long lastMillis;
     debugData* ddStore;
+    int duration[2];
   public:
     serialController();
     void addPeripheral(peripheral* periph);
     int getCnt();
-    bool serialController::validateID(debugData* ddStore,int inVal);
+    bool validateID(debugData* ddStore,int inVal);
     peripheral* retPeriph(int cnt);
-    int printMessage();
     void sendPeriph();
     bool debugPeriphs(int inVal);
     void checkSerial();
+    void debugMode(int debugCnt);
 };
 
 #endif

@@ -17,7 +17,6 @@ void loop() {
 }
 
 
-
 //Serial event checks serial rx buffer everyy loop cycle
 void serialEvent() {
   serialESP->checkSerial();

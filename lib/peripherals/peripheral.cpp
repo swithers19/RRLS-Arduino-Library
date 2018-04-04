@@ -7,6 +7,11 @@ uint8_t peripheral::fetchID() {
   return id;
 }
 
+uint8_t peripheral::fetchMode() 
+{
+    return mode;
+}
+
 //Sends peripherals in byte format
 void peripheral::sendPeriph() {
   if (Serial) {

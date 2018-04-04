@@ -17,6 +17,7 @@ class peripheral {
     void sendPeriph();
     void printPeriph();
     void newID();
+    uint8_t fetchMode();
     virtual void debugAction(uint8_t debugMode) = 0; //Pure virtual class, objects use this to control
 };
 #endif
