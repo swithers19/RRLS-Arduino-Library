@@ -114,7 +114,7 @@ bool serialController::validateID(debugData* ddStore,int inVal) {
 void serialController::debugMode(int debugCnt)
 {
     unsigned long start = millis();
-    uint32_t dur = (duration[0]<<8) +duration[1];
+    unsigned int dur = (duration[0]<<8) +duration[1];
     Serial.println(dur); 
 
     while (dur > (int)(millis() - start)) {

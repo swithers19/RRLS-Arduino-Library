@@ -18,8 +18,8 @@ class serialController {
     int cnt;
     peripheral** payloadArr;
     unsigned long lastMillis;
+    unsigned int duration[2];
     debugData* ddStore;
-    int duration[2];
   public:
     serialController();
     void addPeripheral(peripheral* periph);

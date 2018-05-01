@@ -1,7 +1,9 @@
+#include <SoftwareSerial.h>
+
 #include "serialInterface.h"
 #include "peripheral.h"
 #include "led.h"
 #include "ultraRange.h"
 
-serialController* serialESP = new serialController();
 
+serialController* serialESP = new serialController();
