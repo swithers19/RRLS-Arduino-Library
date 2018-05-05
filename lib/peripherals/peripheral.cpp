@@ -26,14 +26,16 @@ void peripheral::sendPeriph() {
 }
 
 //Prints to serial each parameter of a peripheral
-void peripheral::printPeriph() {
+void peripheral::printPeriph(SoftwareSerial* mySerial) {
   if (Serial) {
-    Serial.println(device);
-    Serial.println(id);
-    Serial.println(mode);
-    Serial.println(senRead);
+    mySerial->print(device);
+    mySerial->print(id);
+    mySerial->print(mode);
+    mySerial->print("'");
+    mySerial->print(senRead);
+    mySerial->print("'");
     for (int i = 0; i < 4; i++) {
-      Serial.println(pinArr[i]);
+      mySerial->print(pinArr[i]);
     }
   }
 }

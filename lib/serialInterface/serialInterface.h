@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 #include "peripheral.h"
 
 #ifndef SERIALINTERFACE_H
@@ -20,8 +21,9 @@ class serialController {
     unsigned long lastMillis;
     unsigned int duration[2];
     debugData* ddStore;
+    SoftwareSerial* mySerial;
   public:
-    serialController();
+    serialController(SoftwareSerial* ms);
     void addPeripheral(peripheral* periph);
     int getCnt();
     bool validateID(debugData* ddStore,int inVal);

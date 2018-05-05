@@ -5,5 +5,5 @@
 #include "led.h"
 #include "ultraRange.h"
 
-
-serialController* serialESP = new serialController();
+SoftwareSerial mySerial(10, 11); // RX, TX
+serialController* serialESP = new serialController(&mySerial);

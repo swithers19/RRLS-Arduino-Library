@@ -1,5 +1,5 @@
 #include <Arduino.h>
-
+#include <SoftwareSerial.h>
 #ifndef PERIPHERAL_H
 #define PERIPHERAL_H
 
@@ -15,7 +15,7 @@ class peripheral {
   public:
     uint8_t fetchID();
     void sendPeriph();
-    void printPeriph();
+    void printPeriph(SoftwareSerial* mySerial);
     void newID();
     uint8_t fetchMode();
     virtual void debugAction(uint8_t debugMode) = 0; //Pure virtual class, objects use this to control

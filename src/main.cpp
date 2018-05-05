@@ -1,8 +1,6 @@
 #include <Arduino.h>
 #include "ardResp.h"
 
-SoftwareSerial mySerial(10, 11); // RX, TX
-
 //Led initialisation
 led myLed(5, serialESP);
 ultraRange sensor(9, 8, serialESP);
@@ -16,17 +14,11 @@ void setup() {
 void loop() {
   myLed.turnOn();
   sensor.readRange();
-  //mySerial.print("ayyyyo");
-  while (Serial.available()>0) {
-    char in = Serial.read();
-    Serial.print(in);
+  Serial.println(sensor.retDistance());
+  while (mySerial.available()>0) {
+    serialESP->checkSerial();
   }
 }
-
-//Serial event checks serial rx buffer everyy loop cycle
-/*void serialEvent() {
-  serialESP->checkSerial();
-}*/
 
 
 

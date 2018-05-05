@@ -1,13 +1,14 @@
 #include "serialInterface.h"
 
 //Initialise the controller with room for 15 peripherals
-serialController::serialController() 
+serialController::serialController(SoftwareSerial* ms) 
 {
   this->cnt = 0;
   this->payloadArr = new peripheral*[15];
   this->ddStore = 0;
   dev = 12;
   lastMillis = millis();
+  this->mySerial = ms;
 }
 
 //Process to add a peripheral, and add it to the index
@@ -20,6 +21,7 @@ void serialController::addPeripheral(peripheral* periph)
 //Keeps track of peripheral amount
 int serialController::getCnt() 
 {
+  mySerial->print(this->cnt);
   return this->cnt;
 }
 
@@ -28,12 +30,12 @@ void serialController::checkSerial()
 {
     static bool debugStart = false;
 
-    while (Serial.available()) {
-        int inChar = Serial.parseInt();               // get the new byte:
-        if (inChar == 97) {
+    while (mySerial->available()) {
+        int inChar = mySerial->read();               // get the new byte:
+        if (inChar == '/') {
                 this->sendPeriph();                 //Send configuration data
         }
-        else if (inChar == 98 && debugStart == false) {
+        else if (inChar == '&' && debugStart == false) {
             //Start debug control process
             debugStart = true;
             ddStore = new debugData[getCnt()];    //Creating data store for debugging data
@@ -65,10 +67,10 @@ bool serialController::debugPeriphs(int inVal) {
     }
     else {
         if (i < 2) {
-        this->duration[i] = inVal;
-        Serial.print("duration byte ");
-        Serial.println(inVal, DEC);
-        i++;
+            this->duration[i] = inVal;
+            Serial.print("duration byte ");
+            Serial.println(inVal, DEC);
+            i++;
         }
         else if (i >= 2) {
             if ((i % 2 == 0) && (inVal != DEBUG_TERM)) {
@@ -143,10 +145,9 @@ void serialController::sendPeriph()
 {
     if ((millis() - (this->lastMillis)) > 50 ) {
         for (int i = 0; i < cnt; i++) {
-        Serial.print("Device ");
-        Serial.println(i);
-        payloadArr[i]->printPeriph();
+            payloadArr[i]->printPeriph(mySerial); 
         }
+        mySerial->print("++"); 
     }
     this->lastMillis = millis();
 }
