@@ -2,23 +2,34 @@
 #include "ardResp.h"
 
 //Led initialisation
-led myLed(5, serialESP);
+led myLed(4, serialESP); 
+led myLed1(5, serialESP);
+//Ultrasonic sensor initialisation
 ultraRange sensor(9, 8, serialESP);
+tempSensor myT(2, serialESP);
 
 void setup() {
-  Serial.begin(9600);
   mySerial.begin(9600);
-
+  Serial.begin(9600);
+  // We need to read from the button
+  //pinMode(2, INPUT);
 }
 
 void loop() {
   myLed.turnOn();
+  myLed1.turnOff();
   sensor.readRange();
-  Serial.println(sensor.retDistance());
-  while (mySerial.available()>0) {
+  
+  myT.readTemp();
+  Serial.println(myT.retTemp());
+
+  while (mySerial.available()>0) { //Send to ESP32
     serialESP->checkSerial();
   }
+
 }
+
+
 
 
 

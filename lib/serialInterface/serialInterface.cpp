@@ -33,7 +33,7 @@ void serialController::checkSerial()
     while (mySerial->available()) {
         int inChar = mySerial->read();               // get the new byte:
         if (inChar == '/') {
-                this->sendPeriph();                 //Send configuration data
+            this->sendPeriph();                 //Send configuration data
         }
         else if (inChar == '&' && debugStart == false) {
             //Start debug control process
@@ -116,22 +116,20 @@ bool serialController::validateID(debugData* ddStore,int inVal) {
 void serialController::debugMode(int debugCnt)
 {
     unsigned long start = millis();
-    unsigned int dur = (duration[0]<<8) +duration[1];
-    Serial.println(dur); 
-
+    unsigned int dur = (duration[0]<<8) +duration[1]; 
+    mySerial->print('~++');
     while (dur > (int)(millis() - start)) {
         //Set each peripheral to desired mode
         for (int i = 0; i<debugCnt; i++) {
             ddStore[i].devPtr->debugAction(ddStore[i].mode);
         }
-        this->sendPeriph();
-
+        //this->sendPeriph();
     }
+
     //Reset back to normal operation
     for (int i = 0; i<debugCnt; i++) {
         ddStore[i].devPtr->debugAction(ddStore[i].devPtr->fetchMode());
     }
-
 }
 
 //Returns a peripheral pointer based on the index provided
@@ -143,9 +141,14 @@ peripheral* serialController::retPeriph(int cnt)
 //Sends to serial all the data of each peripheral
 void serialController::sendPeriph() 
 {
+    mySerial->print('^');
+    mySerial->write(cnt);
     if ((millis() - (this->lastMillis)) > 50 ) {
         for (int i = 0; i < cnt; i++) {
-            payloadArr[i]->printPeriph(mySerial); 
+            payloadArr[i]->writePeriph(mySerial);
+            if (i < (cnt - 1)) {
+                //mySerial->print('\n');
+            }
         }
         mySerial->print("++"); 
     }

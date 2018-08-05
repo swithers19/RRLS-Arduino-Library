@@ -1,13 +1,15 @@
 #include "ultraRange.h"
-
+//Ultrasonic Sensor Constructor
 ultraRange::ultraRange(uint8_t ntrigPin, uint8_t nechoPin, serialController* seri) :peripheral() {
     trigPin = ntrigPin;
     echoPin = nechoPin;
+    //Configuring settings for ultrasonic
     device = 2;
     newID();
-    mode = 0;
+    mode = 1;
     pinCnt = 2;
     senRead = 0;
+    //Pin Assignment
     pinArr = new uint8_t[4]{trigPin, echoPin, 0, 0};
     pinMode(trigPin, OUTPUT);
     pinMode(echoPin, INPUT);
@@ -28,12 +30,11 @@ void ultraRange::readRange(){
 }
 
 int ultraRange::retDistance(){
-    return senRead;
-    
+    return senRead; 
 }
 
 void ultraRange::debugAction(uint8_t debugMode) {
-    if (debugMode == 0) {
+    if (debugMode == 1) {
         readRange();
     }
 }

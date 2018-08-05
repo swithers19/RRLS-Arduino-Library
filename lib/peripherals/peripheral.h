@@ -14,7 +14,7 @@ class peripheral {
     uint8_t* pinArr;
   public:
     uint8_t fetchID();
-    void sendPeriph();
+    void writePeriph(SoftwareSerial* mySerial);
     void printPeriph(SoftwareSerial* mySerial);
     void newID();
     uint8_t fetchMode();

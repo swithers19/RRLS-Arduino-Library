@@ -13,14 +13,15 @@ uint8_t peripheral::fetchMode()
 }
 
 //Sends peripherals in byte format
-void peripheral::sendPeriph() {
-  if (Serial) {
-    Serial.write(device);
-    Serial.write(id);
-    Serial.write(mode);
-    Serial.write(senRead);
+void peripheral::writePeriph(SoftwareSerial* mySerial) {
+  if (mySerial) {
+    mySerial->write((byte)device);
+    mySerial->write((byte)id);
+    mySerial->write((byte)mode);
+    mySerial->write((senRead>>8) & 0xFF);
+    mySerial->write(senRead & 0xFF);
     for (int i = 0; i < 4; i++) {
-      Serial.write(pinArr[i]);
+      mySerial->write((byte)pinArr[i]);
     }
   }
 }

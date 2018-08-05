@@ -4,7 +4,7 @@
 led::led(uint8_t iPin, serialController* seri) : peripheral() {
   device = 1;
   newID();
-  mode = 0;
+  mode = 1;
   pinCnt = 1;
   senRead = 0;
   pinArr = new uint8_t[4]{iPin, 0, 0, 0};
@@ -15,19 +15,19 @@ led::led(uint8_t iPin, serialController* seri) : peripheral() {
 //Pin turnOn
 void led::turnOn() {
   digitalWrite((pinArr[0]), HIGH);
-  mode = 1;
+  mode = 2;
 }
 
 void led::turnOff() {
   digitalWrite((pinArr[0]), LOW); 
-  mode = 0;
+  mode = 1;
 }
 
 void led::debugAction(uint8_t debugMode){
-  if (debugMode == 0) {
+  if (debugMode == 1) {
     turnOff();
   }
-  else if (debugMode == 1) {
+  else if (debugMode == 2) {
     turnOn();
   }
 }
