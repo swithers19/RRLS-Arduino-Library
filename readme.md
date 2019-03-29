@@ -1,3 +1,1 @@
 This library serves to compliment the RRLS system by providing a library for Arduino devices that allows for simple set-up of peripheral I/O.It provides the neccessary communications to the debugging shield which reports the current state of operation, sensor readings and other information via serial communication. This is triggered through constant monitoring of incoming flags which check for what actions the debugging shield is requesting as well as configuration data relevant to the given flag. 
-
-The library is designed to allow for inclusion of a range of peripherals without needing to rewrite any core infrastructure.
