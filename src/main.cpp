@@ -11,8 +11,6 @@ tempSensor myT(2, serialESP);
 void setup() {
   mySerial.begin(9600);
   Serial.begin(9600);
-  // We need to read from the button
-  //pinMode(2, INPUT);
 }
 
 void loop() {
