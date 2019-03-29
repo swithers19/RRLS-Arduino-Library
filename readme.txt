@@ -1,0 +1,1 @@
+The Arduino library provides integrations with peripherals
