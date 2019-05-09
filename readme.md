@@ -10,4 +10,4 @@ The benefit of implementing this was the opportunity to make the code more reada
 ## UML Class Diagram
 Below is the relationship between peripherals and the peripheral object, with the goal to abstract away from each individual peripheral to simplify adding peripherals in the future.
 
-![UML Diagram of Peripherals](https://raw.githubusercontent.com/swithers19/RRLS-Arduino-Library/master/docs/UML-Class-Diagram.png)
+![UML Diagram of Peripherals](https://raw.githubusercontent.com/swithers19/RRLS-Arduino-Library/master/docs/UML-Class-Diagram.jpg)
